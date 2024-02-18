@@ -1,6 +1,8 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
+    width: 1200px;
+    margin: 0 auto;
 }
 .center {
     text-align: center;
@@ -11,10 +13,10 @@ body {
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #1f1f1f;
-        color: #fff;
+        background-color: #1F1F1F;
+        color: #FFFFFF;
         a {
-            color: #fff;
+            color: #FFFFFF;
         }
     }
 }
@@ -22,10 +24,10 @@ body {
 /* Light mode styles */
 @media (prefers-color-scheme: light) {
     body {
-        background-color: #fff;
-        color: #000000;
+        background-color: #FFFFFF;
+        color: #1F1F1F;
         a {
-            color: #000000;
+            color: #1F1F1F;
         }
     }
 }

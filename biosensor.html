@@ -4,15 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Rolando's Project Showcase</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="icon" href="images/misc/cpu.ico">
 </head>
 <body>
-    <a href="./index.html">⬅️ Back to Main Page</a>
+    <a class="no_under" href="./">⬅️ Back to Main Page</a>
 
     <h1 class="center" style="padding-top: 0px;">The Biosensor</h1>
 
@@ -23,6 +20,7 @@
         <h2>Table of Contents </h2>
         <ul></ul>
             <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#heart-rate-monitor">Heart Rate Monitor</a></li>
             <!-- Add more table of contents items here -->
         </ul>
     </body>    
@@ -34,5 +32,11 @@
             <a>There are many different circuits and peripherals that are connected to a Ti Tiva C TM4C123GXL board, which runs all of the code and peripherals.</a>
         </div>
     </p>
+
+    <h2>Heart Rate Monitor</h2>
+    <p>
+        <div>
+            <a>The heart rate monitor is a simple circuit that uses an IR LED and a photodiode to detect the user's heart rate. The IR LED shines light into the user's finger, and the photodiode detects the amount of light that is reflected back. The amount of light that is reflected back changes as the user's heart pumps blood through their finger, and the photodiode is able to detect this change in light. The code then processes this data and calculates the user's heart rate in BPM.</a>
+        </div>
 </body>
 </html>

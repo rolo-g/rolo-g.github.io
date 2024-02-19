@@ -1,8 +1,13 @@
 body {
     font-family: 'Inter', sans-serif;
+    line-height: 1.5;
     font-size: 18px;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
+}
+
+.home{
+    max-width: 1200px;
 }
 
 .center {

@@ -1,41 +1,88 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FPGA Signal Generator • Rolando's Project Showcase</title>
-    
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="icon" href="images/misc/cpu.ico">
-</head>
-<body>
-    <a class="no_under" href="./">⬅️ Back to Main Page</a>
+        <title>FPGA Signal Generator • Rolando's Project Showcase</title>
+        
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="icon" href="images/misc/cpu.ico">
+    </head>
+    <body>
+        <a class="no_under" href="./">⬅️ Back to Main Page</a>
 
-    <h1 class="center" style="padding-top: 0px;">FPGA Signal generator</h1>
+        <h1 class="center" style="padding-top: 0px;">FPGA Signal generator</h1>
 
-    <p>
-        <div class="center" style="font-weight: bold;">
-            <a>Source code: </a> <a href="./404">[N/A]</a>
+        <p>
+            <div class="center" style="font-weight: bold;">
+                <a>Source code: </a> <a href="./404">[N/A]</a>
+            </div>
+        </p>
+
+        <div style="text-align: center;">
+            <a href="/images/signal-gen/PXL_20231130_033720431.jpg" title="Click to see full image">
+                <img src="/images/compressed/PXL_20231130_033720431~2-COMPRESSED.jpg" style="width: 400;">
+            </a>
         </div>
-    </p>
 
-    <div style="text-align: center;">
-        <a href="/images/signal-gen/PXL_20231130_033720431.jpg" title="Click to see full image">
-            <img src="/images/compressed/PXL_20231130_033720431~2-COMPRESSED.jpg" style="width: 400;">
+        <h2>Table of Contents </h2>
+            <ul></ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#hardware">Hardware</a></li>
+            </ul>
+        </body>    
+
+        <h2>Introduction</h2>
+        <p>
+            <div>
+                <a>This project implemented a dual-channel waveform generator on a Xilinx Zynq based Real Digital Blackboard. There were many components to this project, such as the external hardware used for the signal generator, the SystemVerilog code that was used to run that hardware and create data for the signal generator, and also the "system on chip" part of the project which used the Blackboard's ARM chip running Linux to control the hardware via a user-friendly shell terminal.</a><br><br>
+                <a>Unfortunately, there are no demos in this page as the Blackboard had to be returned. There are a few screenshots that were taken as the project progressed showing some of its functions, however. All of the code is of course also available to view as to verify the project's functions.</a>
+            </div>
+        </p>
+
+        <a href="/images/signal-gen/signal-gen_circuit_plan.png" title="Click to see full image">
+            <img src="/images/signal-gen/signal-gen_circuit_plan.png" style="float: right; width: 200px;">
         </a>
-    </div>
+        <h2>Hardware</h2>
+        <p>
+            <div>
+                <a>As stated previously, there is external hardware connected to the Real Digital Blackboard that was used in creating the signals. This includes a MCP4822 dual channel 12-bit digital to analog converter, an ICL7660 voltage converter, and a TLV2372 rail-to-rail op amp.</a><br><br>
+                <a>To the right is how I planned the external circuit, along with how it connected to the Blackboard. This was so the hardware could be soldered onto a small 5x7cm prototyping board and connected to the blackboard via a 2x7 right-angled pin header.</a>
+            </div>
+        </p>
+        
+        <h3>MCP4822 Dual Channel DAC</h3>
+        <a href="/images/signal-gen/mcp4822.png" title="Click to see full image">
+            <img src="/images/signal-gen/mcp4822.png" style="float: left; width: 250px; padding-right: 10px;">
+        </a>
+        <p>
+            <div>
+                <a>The MCP4822 a dual-channel 12-bit digital to analog converter that communicates via SPI and can output voltages from 0 to 2.047. The Blackboard was connected to it via its PMOD connectors, and a hardware implementation on an FPGA written in SystemVerilog was written to drive the DAC. More on this can be read in the <a href="#software">software</a> section of this page.</a>
+            </div>
+        </p>
 
-    <h2>Table of Contents </h2>
-        <ul></ul>
-            <li><a href="#introduction">Introduction</a></li>
-        </ul>
-    </body>    
+        <h3>ICL7660 Voltage Converter</h3>
+        <a href="/images/signal-gen/icl7660.png" title="Click to see full image">
+            <img src="/images/signal-gen/icl7660.png" style="float: right; width: 250px;">
+        </a>
+        <p>
+            <div>
+                <a>The ICL7660 is a voltage converter that takes a positive voltage and converts it to a negative voltage. This was used to create a negative voltage rail for the op amp, as the MCP4822 DAC only supplies positive voltage. This will allow signals to be able to peak from positive to negative voltage, otherwise the voltage floor would always be 0. </a>
+            </div>
+        </p>
 
-    <h2>Introduction</h2>
-    <p>
-        <div>
-            <a>Sample text</a><br>
-        </div>
-    </p>
-</body>
+        <h3>TLV2372 Rail-to-Rail Op Amp</h3>
+        <a href="/images/signal-gen/tlv2372.png" title="Click to see full image">
+            <img src="/images/signal-gen/tlv2372.png" style="float: left; width: 350px; padding-right: 10px;">
+        </a>
+        <p>
+            <div>
+                <a>The TLV2372 is a rail-to-rail op amp that was used to buffer the signals from the DAC. This allows the signal generator to be able to output signals from negative to positive 2.5V. The resistor values were carefully chosen by our professor in order to make sure that the negative and positive voltages could be as close as they possibly could.</a>
+            </div>
+        </p>
+
+        <h3>Implementation on Prototype Board</h3>
+
+
+    </body>
 </html>

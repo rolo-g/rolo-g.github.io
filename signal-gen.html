@@ -1,135 +1,160 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>FPGA Signal Generator • Rolando's Project Showcase</title>
-        
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <link rel="icon" href="images/misc/cpu.ico">
-    </head>
-    <body>
-        <a class="no_under" href="./"><strong>◄ Back</strong></a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <h1 class="center" style="padding-top: 0px;">FPGA Signal generator</h1>
+  <title>FPGA Signal Generator · Rolando's Project Showcase</title>
 
-        <p>
-            <div class="center" style="font-weight: bold;">
-                <a>Source code: [N/A yet]</a>
-            </div>
-        </p>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="icon" href="images/misc/cpu.ico">
+</head>
 
-        <div style="text-align: center;">
-            <a href="/images/signal-gen/PXL_20231130_033720431.jpg" title="Click to see full image" target="_blank">
-                <img src="/images/compressed/PXL_20231130_033720431~2-COMPRESSED.jpg" style="width: 400;">
-            </a>
-        </div>
+<body>
+  <a class="no_under" href="./">
+    ⌂ Home
+  </a>
 
-        <h2>Table of Contents </h2>
-            <ul></ul>
-                <li><a href="#introduction">Introduction</a></li>
-                <li><a href="#hardware">Hardware</a></li>
-                <li><a href="#hdl-implementation">HDL Implementation</a></li>
-                <li><a href="#linux-software">Linux Software</a></li>
-            </ul>
-        </body>    
+  <h1 class="center">
+    FPGA Signal Generator
+  </h1>
 
-        <h2 id="introduction">Introduction</h2>
-        <p>
-            <div>
-                <a>This project implemented a dual-channel waveform generator on a Xilinx Zynq based Real Digital Blackboard. There were many components to this project, such as the external hardware used for the signal generator, the SystemVerilog code that was used to run that hardware and create data for the signal generator, and also the "system on chip" part of the project which used the Blackboard's ARM chip running Linux to control the hardware via a user-friendly shell terminal.</a><br><br>
-                <a>Unfortunately, there are no demos in this page as the Blackboard had to be returned. There are a few screenshots that were taken as the project progressed showing some of its functions, however. All of the code is of course also available to view as to verify the project's functions.</a>
-            </div>
-        </p>
+  <p class="center" style="font-weight: bold;">
+    Source code: [N/A yet]
+  </p>
 
-        <h2 id="hardware">Hardware</h2>
-        <a href="/images/signal-gen/signal-gen_circuit_plan.png" title="Click to see full image" target="_blank">
-            <img src="/images/signal-gen/signal-gen_circuit_plan.png" style="float: right; width: 200px;">
-        </a>
-        <p>
-            <div>
-                <a>As stated previously, there is external hardware connected to the Real Digital Blackboard that was used in creating the signals. This includes a MCP4822 dual channel 12-bit digital to analog converter, an ICL7660 voltage converter, and a TLV2372 rail-to-rail op amp.</a><br><br>
-                <a>To the right is how I planned the external circuit, along with how it connected to the Blackboard. This was so the hardware could be soldered onto a small 5x7cm prototyping board and connected to the blackboard via a 2x7 right-angled pin header.</a>
-            </div>
-        </p>
-        
-        <h3>MCP4822 Dual Channel DAC</h3>
-        <a href="/images/signal-gen/mcp4822.png" title="Click to see full image" target="_blank">
-            <img src="/images/signal-gen/mcp4822.png" style="float: left; width: 250px; padding-right: 10px;">
-        </a>
-        <p>
-            <div>
-                <a>The MCP4822 a dual-channel 12-bit digital to analog converter that communicates via SPI and can output voltages from 0 to 2.047. The Blackboard was connected to it via its PMOD connectors, and a hardware implementation on an FPGA written in SystemVerilog was written to drive the DAC. More on this can be read in the <a href="#software">software</a> section of this page.</a>
-            </div>
-        </p>
+  <a href="/images/signal-gen/PXL_20231130_033720431.jpg" title="Click to see full image" target="_blank">
+    <img class="img_center" src="/images/compressed/PXL_20231130_033720431~2-COMPRESSED.jpg" style="max-width: 600px;">
+  </a>
 
-        <h3>ICL7660 Voltage Converter</h3>
-        <a href="/images/signal-gen/icl7660.png" title="Click to see full image" target="_blank">
-            <img src="/images/signal-gen/icl7660.png" style="float: right; width: 250px;">
-        </a>
-        <p>
-            <div>
-                <a>The ICL7660 is a voltage converter that takes a positive voltage and converts it to a negative voltage. This was used to create a negative voltage rail for the op amp, as the MCP4822 DAC only supplies positive voltage. This will allow signals to be able to peak from positive to negative voltage, otherwise the voltage floor would always be 0. </a>
-            </div>
-        </p>
+  <h2 id="table-of-contents">
+    Table of Contents
+  </h2>
 
-        <h3>TLV2372 Rail-to-Rail Op Amp</h3>
-        <a href="/images/signal-gen/tlv2372.png" title="Click to see full image" target="_blank">
-            <img src="/images/signal-gen/tlv2372.png" style="float: left; width: 300px; padding-right: 10px;">
-        </a>
-        <p>
-            <div>
-                <a>The TLV2372 is a rail-to-rail op amp that was used to buffer the signals from the DAC. This allows the signal generator to be able to output signals from negative to positive 2.5V. The resistor values were carefully chosen by our professor in order to make sure that the negative and positive voltages could be as close as they possibly could.</a>
-            </div>
-        </p>
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#hardware">Hardware</a></li>
+    <li><a href="#hdl-implementation">HDL Implementation</a></li>
+    <li><a href="#linux-software">Linux Software</a></li>
+  </ul>
 
-        <h3>Implementation on Prototype Board</h3>
-        <div style="text-align: center;">
-            <a href="/images/signal-gen/sig_circuit.jpg" title="Click to see full image" target="_blank">
-                <img src="/images/signal-gen/sig_circuit-COMPRESSED.jpg" style="width: 400;">
-            </a>
-        </div>
+  <h2 id="introduction">Introduction</h2>
 
-        <h2 id="hdl-implementation">HDL Implementation</h2>
-            <div>
-                <a>Below is the block diagram of the entire implementation of the FPGA as seen in Xilinx Vivado. Here, you can see both the AXI-4 Lite IP Module, BRAM, and external outputs that go to the top level module of the implementation. It helps illustrate how all of these systems work together.</a>
-            </div>
-            <div style="text-align: center; padding-top: 10px">
-                <a href="/images/signal-gen/fpga_block_design.png" title="Click to see full image" target="_blank">
-                    <img src="/images/signal-gen/fpga_block_design-CROPPED.jpg" style="width: 500;">
-                </a>
-            </div>
-        </p>
+  <p>
+    This project implemented a dual-channel waveform generator on a Xilinx Zynq based Real Digital Blackboard. There
+    were many components to this project, such as the external hardware used for the signal generator, the
+    SystemVerilog
+    code that was used to run that hardware and create data for the signal generator, and also the "system on chip"
+    part
+    of the project which used the Blackboard's ARM chip running Linux to control the hardware via a user-friendly
+    shell
+    terminal.<br><br>
+    Unfortunately, there are no demos in this page as the Blackboard had to be returned. There are a few screenshots
+    that were taken as the project progressed showing some of its functions, however. All of the code is of course
+    also
+    available to view as to verify the project's functions.
+  </p>
 
-        <h3>SPI DAC Driver</h3>
-        <p>
-            <div>
-                <a>The SPI DAC driver was written in SystemVerilog and was used to drive the MCP4822 DAC. As stated previoulsly, the DAC is dual-channel and this driver does run both. It runs the DAC at an max rate of 100 KHz. Below, you can see the order in which each signal is meant to be pulled in order to run both outputs simultaneously.</a>
-            </div>
-        </p>
-        <div style="text-align: center;">
-            <a href="/images/signal-gen/spi_bits.jpeg" title="Click to see full image" target="_blank">
-                <img src="/images/signal-gen/spi_bits.jpeg" style="width: 500;">
-            </a>
-        </div>
-        <p> 
-            <div>
-                <a>Fourty clocks were sent at a rate of 4 MHz to the DAC which is where the 100 KHz rate comes from. In terms of a state machine, there were six states in sending the data, which went as follows: </a><br><br>
-                <a><code>
-                    1) Idle for 2 clocks → 2) Send 16 bits for channel A → 3) Pull ~CS high for 4 clocks → 4) Send 16 bits for channel B → 5) Idle for 2 clocks → 6) Pull ~LDAC low and ~CS high, pull ~LDAC high at the end → 1) ...
-                </code></a> <br><br>
-                <a>This can be seen in the SystemVerilog code of the spi_engine.sv top-level module, starting at line 144 through line 259. Since the code is very long, click here to see the code on GitHub.</a>
-            </div>
-        </p>
+  <h2 id="hardware">Hardware</h2>
 
-        <h3>"Wavegen" AXI-4 Lite IP Module</h3>
-        <p>
-            <div>
-                <a>The Wavegen IP is where the 12 bits that the SPI DAC needed were calculated. It has 8 32-bit registers that store various settings that affected the output of the signal generator, and were easily able to be written to using Linux programs that wrote to the registers of the module via the AXI-4 Lite bus.</a>
-            </div>
-        </p>
+  <a href="/images/signal-gen/signal-gen_circuit_plan.png" title="Click to see full image" target="_blank">
+    <img class="img_right" src="/images/signal-gen/signal-gen_circuit_plan.png" style="max-width: 200px;">
+  </a>
 
-        <h2 id="linux-software">Linux Software</h2>
+  <p>
+    As stated previously, there is external hardware connected to the Real Digital Blackboard that was used in
+    creating
+    the signals. This includes a MCP4822 dual channel 12-bit digital to analog converter, an ICL7660 voltage
+    converter,
+    and a TLV2372 rail-to-rail op amp.<br><br>
+    To the right is how I planned the external circuit, along with how it connected to the Blackboard. This was so
+    the
+    hardware could be soldered onto a small 5x7cm prototyping board and connected to the blackboard via a 2x7
+    right-angled pin header.
+  </p>
 
-    </body>
+  <h3>MCP4822 Dual Channel DAC</h3>
+
+  <a href="/images/signal-gen/mcp4822.png" title="Click to see full image" target="_blank">
+    <img class="img_left" src="/images/signal-gen/mcp4822.png" style="max-width : 200px">
+  </a>
+  <p>
+    The MCP4822 a dual-channel 12-bit digital to analog converter that communicates via SPI and can output voltages
+    from
+    0 to 2.047. The Blackboard was connected to it via its PMOD connectors, and a hardware implementation on an FPGA
+    written in SystemVerilog was written to drive the DAC. More on this can be read in the <a
+      href="#software">software</a> section of this page.</a>
+  </p>
+
+  <h3>ICL7660 Voltage Converter</h3>
+
+  <a href="/images/signal-gen/icl7660.png" title="Click to see full image" target="_blank">
+    <img class="img_right" src="/images/signal-gen/icl7660.png" style="width: 200px">
+  </a>
+  <p>
+    The ICL7660 is a voltage converter that takes a positive voltage and converts it to a negative voltage. This was
+    used to create a negative voltage rail for the op amp, as the MCP4822 DAC only supplies positive voltage. This
+    will
+    allow signals to be able to peak from positive to negative voltage, otherwise the voltage floor would always be
+    0.
+  </p>
+
+  <h3>TLV2372 Rail-to-Rail Op Amp</h3>
+
+  <a href="/images/signal-gen/tlv2372.png" title="Click to see full image" target="_blank">
+    <img class="img_left" src="/images/signal-gen/tlv2372.png" style="width: 250px;">
+  </a>
+  <p>
+    The TLV2372 is a rail-to-rail op amp that was used to buffer the signals from the DAC. This allows the signal
+    generator to be able to output signals from negative to positive 2.5V. The resistor values were carefully chosen
+    by
+    our professor in order to make sure that the negative and positive voltages could be as close as they possibly
+    could.
+  </p>
+
+  <h3>Implementation on Prototype Board</h3>
+
+  <a href="/images/signal-gen/sig_circuit.jpg" title="Click to see full image" target="_blank">
+    <img class="img_center" src="/images/signal-gen/sig_circuit-COMPRESSED.jpg" style="max-width: 400px;">
+  </a>
+
+  <h2 id="hdl-implementation">HDL Implementation</h2>
+
+  <p>
+    The SPI DAC driver was written in SystemVerilog and was used to drive the MCP4822 DAC. As stated previoulsly,
+    the DAC is dual-channel and this driver does run both. It runs the DAC at an max rate of 100 KHz. Below, you can
+    see the order in which each signal is meant to be pulled in order to run both outputs simultaneously.
+  </p>
+  <a href="/images/signal-gen/spi_bits.jpeg" title="Click to see full image" target="_blank">
+    <img class="img_center" src="/images/signal-gen/spi_bits.jpeg" style="max-width: 500px">
+  </a>
+  <p>
+    Fourty clocks were sent at a rate of 4 MHz to the DAC which is where the 100 KHz rate comes from. In terms
+    of a
+    state machine, there were six states in sending the data, which went as follows: <br><br>
+    <code>
+      1) Idle for 2 clocks → 2) Send 16 bits for channel A → 3) Pull ~CS high for 4 clocks → 4) Send 16 bits for channel B → 5) Idle for 2 clocks → 6) Pull ~LDAC low and ~CS high, pull ~LDAC high at the end → 1) ...
+    </code> <br><br>
+    This can be seen in the SystemVerilog code of the spi_engine.sv top-level module, starting at line 144
+    through
+    line
+    259. Since the code is very long, click here to see the code on GitHub.
+  </p>
+
+  <h3>"Wavegen" AXI-4 Lite IP Module</h3>
+
+  <p>
+    The Wavegen IP is where the 12 bits that the SPI DAC needed were calculated. It has 8 32-bit registers that
+    store
+    various settings that affected the output of the signal generator, and were easily able to be written to
+    using
+    Linux
+    programs that wrote to the registers of the module via the AXI-4 Lite bus.
+  </p>
+
+  <h2 id="linux-software">Linux Software</h2>
+
+</body>
+
 </html>

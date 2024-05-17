@@ -11,6 +11,10 @@ body {
     color: #000101;
 }
 
+a {
+    color: #000101;
+}
+
 .home {
     max-width: 1200px;
 }

@@ -19,7 +19,7 @@
 
   <!-- First Heading  -->
   <h1 class="center">
-    IEEE Region 5 Robotics Competition Robot
+    2024 IEEE Region 5 Robotics Competition Robot
   </h1>
 
   <!-- GitHub link  -->
@@ -37,13 +37,23 @@
   </h2>
 
   <ul>
-    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#project-overview">Project Overview</a></li>
+    <li><a href="#my-contributions">My Contributions</a></li>
   </ul>
 
-  <h2 id="introduction">Introduction</h2>
+  <h2 id="project-overview">Project Overview</h2>
 
   <p>
-    Sample text
+    This project was for my Senior Design I and II classes. My team and I entered the annual IEEE Region 5 Robotics Competition. The competition itself took place in early April in Fayetteville, AR. The goal of the competition was to have a fully autonomous low-powered robot capable of navigating a course at the same time against other competitors, outlasting and overtaking their robots. The real challenge was that the robot had to be powered on a supercapacitor, as it had to be initially charged by a wireless Qi charger at the start of each round, with the option of charging throughout the round at various charging stations. My team ended up placing first in the competition, outlasting every other robot in the competition by using low powered components with clever algorithms to minimize power consumption. <br><br>
+
+    This page is temporary as a standalone website is being written by the team to go in detail: <a href="https://bb-uta.com" target="_blank">bb-uta.com</a> <br>
+    Here is a link to the competition ruleset: <a href="https://r5conferences.org/documents/2023/11/2024-robotics-rules.pdf/" target="_blank">r5conferences.org/documents/2023/11/2024-robotics-rules.pdf</a> <br>
+    The source code for the robot is available at the GitHub link above.
+  </p>
+    
+  <h2 id="my-contributions">My Contributions</h2>
+  <p>
+    For this project, I worked on one of the requirements being a wireless remote for starting and stopping the robot. I did this using an IR sensor + TV remote. I also worked on the robot's initial sleep state, turning off all of the peripherals and setting the microcontroller (an ESP32-S3) to sleep on startup as to minimize power consumption while charging. The robot would exit the sleep state once the IR remote sent the correct signal to start the robot. I also worked on selecting the supercapacitor to be used by the robot, testing various supercapacitors and seeing their charge and discharging characteristics in order to find the best one for our robot. I was also the one that did the physical construction of the robot, designing all of the circuits that went on blank protoboards and soldering them. The chassis was created in Solidworks by another team member, but with close collaboration with me to make sure all of the components fit and worked properly.<br><br>
   </p>
 
 </body>

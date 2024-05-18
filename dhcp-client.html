@@ -32,7 +32,7 @@
     <img class="img_center" src="/images/dhcp-client/PXL_20240218_231336610.NIGHT-COMPRESSED.jpg" style="max-width: 600px;">
   </a>
 
-  <h2 id="table-of-contents">
+  <!-- <h2 id="table-of-contents">
     Table of Contents
   </h2>
 
@@ -40,10 +40,16 @@
     <li><a href="#introduction">Introduction</a></li>
   </ul>
 
-  <h2 id="introduction">Introduction</h2>
+  <h2 id="introduction">Introduction</h2> -->
+
+  <h2 id="project-overview"> Project Overview</h2>
 
   <p>
-    Sample text
+    This is a DHCP client that follows the RFC 2131 spec. It uses an ENC28J60 Ethernet controller connected to a Ti TM4C evaluation board via SPI. It follows the typical DHCP state machine as outlined by the RFC 2131 spec. This project on its own does not do much, as it is meant to be used as a basic framework for future IoT devices that require a DHCP implementation. <br><br>
+
+    Once bound, it can send ICMP requests and receive ICMP responses, along with being able to send and reply to ARP requests. <br><br>
+
+    This page is still under construction, however the full project source code is available in the link above on GitHub.
   </p>
 
 </body>

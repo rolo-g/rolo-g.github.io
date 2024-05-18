@@ -7,12 +7,12 @@ body {
     margin: 0 auto;
     padding: 16px;
 
-    background-color: #fffefe;
-    color: #000101;
+    background-color: #ffffff;
+    color: #444444;
 }
 
 a {
-    color: #000101;
+    color: #444444;
 }
 
 .home {
@@ -26,7 +26,7 @@ a {
 .responsive-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Adjust the spacing as needed */
+    gap: 5px; /* Adjust the spacing as needed */
     justify-content: center;
     align-items: center;
 }

@@ -45,7 +45,9 @@
   <h2 id="project-overview"> Project Overview</h2>
 
   <p>
-    The biosensor is a non-medical heart and respiratory rate monitoring device that reports the heart rate in BPM and respiratory rate in breaths per minute of a user. It uses a phototransistor with a red LED to measure blood flow in a user's finger, changing the output voltage of the phototransistor and sending that to the microcontroller's ADC. To measure breath rate, it uses an HX711 and an apparatus with a strain gauge worn around the user's diaphragm to detect and calculate the user's breath rate. <br><br>
+    The biosensor is a non-medical heart and respiratory rate monitoring device that reports the heart rate in BPM and respiratory rate in breaths per minute of a user. It uses a phototransistor with a red LED to measure blood flow in a user's finger, changing the output voltage of the phototransistor and sending that to the microcontroller's ADC. To measure breath rate, it uses an HX711 and a strain gauge apparatus worn around the user's diaphragm to detect (via an interrupt) and calculate the user's breath rate. There is also a PWM buzzer speaker used for alerts. <br><br>
+
+    There is a shell interface that the user can interact with that allows the user to change the minimum and maximum heart and respiratory rates calculated by the device before it buzzes the buzzer, acting as an emergency alert of sorts. The user can also view the most recent values or have it print continuously to the shell. <br><br>
 
     This page is still under construction, however the full project source code is available in the link above on GitHub.
   </p>

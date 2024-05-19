@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Tab Title -->
+  <!-- Tab Title -->
   <title>Sound Detector - Rolando's Project Showcase</title>
 
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -48,10 +48,12 @@
   <p>
     This project utilized three microphones in a triangular array to track the angle of a sound source in a 2D plane.
     The three microphones were connected to one ADC on the microcontroller, and as three separate spikes were detected
+    by the microcontroller triggering an ISR, the time difference of arrival was calculated between the three
+    microphones, which was used to finally calculate the angle. <br><br>
+
     There is a shell interface that the user can interact with that allows the user to change various settings such as
     minimum threshold, displaying the ambient noise level, backoff, and other settings. The user can also view the most
     recent event angle calculated, or have the device automatically print new events as they come in. <br><br>
-    microphones, which was used to finally calculate the angle. <br><br>
 
     This page is still under construction, however the full project source code is available in the link above on
     GitHub.

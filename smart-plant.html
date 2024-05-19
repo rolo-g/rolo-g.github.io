@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Tab Title -->
+  <!-- Tab Title -->
   <title>IoT Smart Plant - Rolando's Project Showcase</title>
 
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -24,15 +24,16 @@
 
   <!-- GitHub link  -->
   <p class="center" style="font-weight: bold;">
-    Source Code: <a href="https://github.com/nxarteaga/IoT-Smart-Planter">GitHub</a>
+    Source Code: <a href="https://github.com/nxarteaga/IoT-Smart-Planter" target="_blank">GitHub</a>
   </p>
 
   <!-- Thumbnail image  -->
   <a href="/images/smart-plant/PXL_20240517_224236927.NIGHT.jpg" title="Click to see full image" target="_blank">
-    <img class="img_center" src="/images/smart-plant/PXL_20240517_224236927.NIGHT-COMPRESSED.jpg" style="max-width: 600px;">
+    <img class="img_center" src="/images/smart-plant/PXL_20240517_224236927.NIGHT-COMPRESSED.jpg"
+      style="max-width: 600px;">
   </a>
 
-  <h2 id="table-of-contents">
+  <!-- <h2 id="table-of-contents">
     Table of Contents
   </h2>
 
@@ -40,10 +41,26 @@
     <li><a href="#introduction">Introduction</a></li>
   </ul>
 
-  <h2 id="introduction">Introduction</h2>
+  <h2 id="introduction">Introduction</h2> -->
+
+  <h2 id="project-overview"> Project Overview</h2>
 
   <p>
-    Sample text
+    This is an MQTT enabled smart plant that uses an ENC28J60 Ethernet controller connected to a Ti TM4C evaluation
+    board via SPI. Ethernet, IP, and ARP libraries were provided, with the TCP and MQTT implementations building on top
+    of those libraries, written from scratch in C. The TCP/IP implementation follows the RFC 793 spec, implementing the
+    full TCP state machine as outlined by it. The MQTT implementation follows the 3.1.1 protocol level, and operates at
+    a "send once" quality of service (QoS 0). <br><br>
+
+    The plant could publish various properties such as the temperature, humidity, soil moisture, and light levels via
+    MQTT. It could also subscribe to topics, with one being a "moisture-setpoint" being the minimum moisture level
+    before the plant would need to be watered via a PWM water pump. <br><br>
+
+    The project was a class-wide collaboration. Each person/team had a different part of a "smart home" to implement.
+    For example one team created a MQTT broker, one team implemented IFTTT-style rules, and etcetera. <br><br>
+
+    This page is still under construction, however the full project source code is available in the link above on
+    GitHub.
   </p>
 
 </body>
